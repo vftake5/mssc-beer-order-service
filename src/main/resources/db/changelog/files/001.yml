@@ -1,0 +1,166 @@
+databaseChangeLog:
+  - changeSet:
+      id: "create_account_table"
+      author: "vf"
+      changes:
+#        - sql:
+#            endDelimiter: \n
+#            sql: CREATE SCHEMA IF NOT EXISTS Brewery;
+        - createTable:
+            tableName: beer_order
+            schemaName: order_beer
+            columns:
+              - column:
+                  name: id
+                  type: VARCHAR(36)
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: beer_order_pk
+              - column:
+                  name: version
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_modified_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: customer_ref
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: customer_id
+                  type: VARCHAR(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: order_status
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: order_status_callback_url
+                  type: VARCHAR(2000)
+                  constraints:
+                    nullable: true
+        - createTable:
+            tableName: beer_order_line
+            schemaName: order_beer
+            columns:
+              - column:
+                  name: id
+                  type: VARCHAR(36)
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: beer_order_line_pk
+              - column:
+                  name: version
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_modified_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: beer_id
+                  type: VARCHAR(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: beer_order_id
+                  type: VARCHAR(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: upc
+                  type: VARCHAR(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: order_quantity
+                  type: INTEGER
+                  constraints:
+                    nullable: true
+              - column:
+                  name: quantity_allocated
+                  type: INTEGER
+                  constraints:
+                    nullable: true
+        - createTable:
+            tableName: customer
+            schemaName: order_beer
+            columns:
+              - column:
+                  name: id
+                  type: VARCHAR(36)
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: customer_pk
+              - column:
+                  name: version
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_modified_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: customer_name
+                  type: VARCHAR(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: api_key
+                  type: VARCHAR(36)
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: customer_id
+            baseTableName: beer_order
+            constraintName: fk_customer_order
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: customer
+            validate: true
+        - addForeignKeyConstraint:
+            baseColumnNames: beer_order_id
+            baseTableName: beer_order_line
+            constraintName: fk_order_line
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: beer_order
+            validate: true

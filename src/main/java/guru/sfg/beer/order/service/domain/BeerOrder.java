@@ -64,3 +64,8 @@ public class BeerOrder extends BaseEntity {
     private OrderStatusEnum orderStatus = OrderStatusEnum.NEW;
     private String orderStatusCallbackUrl;
 }
+
+
+
+
+//    meg kell csinálni a customer táblát és a foreign key-eket. illetve a berr order line táblát is

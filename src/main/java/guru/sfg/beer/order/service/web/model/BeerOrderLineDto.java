@@ -21,6 +21,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -43,6 +44,8 @@ public class BeerOrderLineDto extends BaseItem {
 
     private String upc;
     private String beerName;
+
+    @Type(type="uuid-char")
     private UUID beerId;
     private String beerStyle;
     private BigDecimal price;

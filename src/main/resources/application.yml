@@ -1,8 +1,38 @@
 logging:
   level:
-    guru: debug
+    root: INFO
+    guru: INFO
+    org:
+      springframework: ERROR
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+    com:
+      zaxxer:
+        hikari:
+          HikariConfig: DEBUG
+    liquibase: INFO
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+    file: "%d %p %c{1.} [%t] %m%n"
+  file:
+    name: app.log
 server:
   port: 8081
 sfg:
   brewery:
     beer-service-host: "http://localhost:8080"
+spring:
+#  cache:
+#    jcache:
+#      config: "classpath:ehcache.xml"
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yml
+    liquibase-schema: order_beer
+  jpa:
+    defer-datasource-initialization: false
+    hibernate:
+      ddl-auto: validate
