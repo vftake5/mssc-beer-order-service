@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    #    url: "jdbc:h2:mem:testdb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_ON_EXIT=FALSE"
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=public
+    username: postgres
+#    password:
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 20
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+        useLocalSessionState: true
+        rewriteBatchedStatements: true
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        elideSetAutoCommits: true
+        maintainTimeStats: false
+  jpa:
+    database: postgresql
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yml
+    liquibase-schema: public

@@ -8,7 +8,7 @@ databaseChangeLog:
 #            sql: CREATE SCHEMA IF NOT EXISTS Brewery;
         - createTable:
             tableName: beer_order
-            schemaName: order_beer
+#            schemaName: order_beer
             columns:
               - column:
                   name: id
@@ -55,7 +55,7 @@ databaseChangeLog:
                     nullable: true
         - createTable:
             tableName: beer_order_line
-            schemaName: order_beer
+#            schemaName: order_beer
             columns:
               - column:
                   name: id
@@ -107,7 +107,7 @@ databaseChangeLog:
                     nullable: true
         - createTable:
             tableName: customer
-            schemaName: order_beer
+#            schemaName: order_beer
             columns:
               - column:
                   name: id
