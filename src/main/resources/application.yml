@@ -13,7 +13,7 @@ logging:
     com:
       zaxxer:
         hikari:
-          HikariConfig: DEBUG
+          HikariConfig: INFO
     liquibase: INFO
   pattern:
     console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
@@ -36,3 +36,5 @@ spring:
     defer-datasource-initialization: false
     hibernate:
       ddl-auto: validate
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yml

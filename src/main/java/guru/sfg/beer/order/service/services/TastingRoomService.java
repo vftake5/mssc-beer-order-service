@@ -4,6 +4,7 @@ import guru.sfg.beer.order.service.bootstrap.BeerOrderBootStrap;
 import guru.sfg.beer.order.service.domain.Customer;
 import guru.sfg.beer.order.service.repositories.BeerOrderRepository;
 import guru.sfg.beer.order.service.repositories.CustomerRepository;
+import guru.sfg.beer.order.service.services.beer.BeerService;
 import guru.sfg.beer.order.service.web.model.BeerOrderDto;
 import guru.sfg.beer.order.service.web.model.BeerOrderLineDto;
 import lombok.extern.slf4j.Slf4j;
@@ -23,13 +24,15 @@ public class TastingRoomService {
     private final CustomerRepository customerRepository;
     private final BeerOrderService beerOrderService;
     private final BeerOrderRepository beerOrderRepository;
+    private final BeerService beerService;
     private final List<String> beerUpcs = new ArrayList<>(3);
 
     public TastingRoomService(CustomerRepository customerRepository, BeerOrderService beerOrderService,
-                              BeerOrderRepository beerOrderRepository) {
+                              BeerOrderRepository beerOrderRepository, BeerService beerService) {
         this.customerRepository = customerRepository;
         this.beerOrderService = beerOrderService;
         this.beerOrderRepository = beerOrderRepository;
+        this.beerService = beerService;
 
         beerUpcs.add(BeerOrderBootStrap.BEER_1_UPC);
         beerUpcs.add(BeerOrderBootStrap.BEER_2_UPC);
@@ -53,8 +56,9 @@ public class TastingRoomService {
         String beerToOrder = getRandomBeerUpc();
 
         BeerOrderLineDto beerOrderLine = BeerOrderLineDto.builder()
+                .beerId(beerService.getBeerByUpc(beerToOrder).get().getId())
                 .upc(beerToOrder)
-                .orderQuantity(new Random().nextInt(6)) //todo externalize value to property
+                .orderQuantity(new Random().nextInt(6) + 1) //todo externalize value to property
                 .build();
 
         List<BeerOrderLineDto> beerOrderLineSet = new ArrayList<>();

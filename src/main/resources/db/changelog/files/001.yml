@@ -12,7 +12,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: VARCHAR(36)
+                  type: UUID
                   autoIncrement: false
                   constraints:
                     primaryKey: true
@@ -40,7 +40,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: customer_id
-                  type: VARCHAR(36)
+                  type: UUID
                   constraints:
                     nullable: false
               - column:
@@ -59,7 +59,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: VARCHAR(36)
+                  type: UUID
                   autoIncrement: false
                   constraints:
                     primaryKey: true
@@ -82,12 +82,12 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: beer_id
-                  type: VARCHAR(36)
+                  type: UUID
                   constraints:
                     nullable: false
               - column:
                   name: beer_order_id
-                  type: VARCHAR(36)
+                  type: UUID
                   constraints:
                     nullable: false
               - column:
@@ -111,7 +111,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: VARCHAR(36)
+                  type: UUID
                   autoIncrement: false
                   constraints:
                     primaryKey: true
@@ -139,7 +139,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: api_key
-                  type: VARCHAR(36)
+                  type: UUID
                   constraints:
                     nullable: false
         - addForeignKeyConstraint:
